@@ -10,8 +10,8 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final Product product = Provider.of<Product>(
       context,
-      listen: true,
-      // listen:false  // usamos para dados que são imutáveis, dados que não precisam refletir na UI
+      listen: false,
+      // listen:false  // usamos para dados que são imutáveis, dados que não precisam refletir na
     );
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
@@ -28,14 +28,16 @@ class ProductItem extends StatelessWidget {
         ),
         footer: GridTileBar(
           backgroundColor: Colors.black38,
-          leading: IconButton(
-            onPressed: () {
-              product.toggleFavorite();
-            },
-            icon: product.isFavorite
-                ? Icon(Icons.favorite)
-                : Icon(Icons.favorite_border_sharp),
-            color: Theme.of(context).accentColor,
+          leading: Consumer<Product>(
+            builder: (context, product, _) => IconButton(
+              onPressed: () {
+                product.toggleFavorite();
+              },
+              icon: product.isFavorite
+                  ? const Icon(Icons.favorite)
+                  : const Icon(Icons.favorite_border_sharp),
+              color: Theme.of(context).colorScheme.secondary,
+            ),
           ),
           trailing: IconButton(
             onPressed: () {},
