@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/components/badge.dart';
 import 'package:shop/components/product_grid.dart';
+import 'package:shop/models/cart.dart';
 import 'package:shop/models/product_list.dart';
 
 enum FilterOptions {
@@ -36,6 +38,18 @@ class ProductsOverviewPage extends StatelessWidget {
               } else {
                 provider.showAll();
               }
+            },
+          ),
+          Consumer<Cart>(
+            child: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.shopping_cart),
+            ),
+            builder: (context, cart, child) {
+              return Badge(
+                value: cart.itensCount.toString(),
+                child: child!,
+              );
             },
           ),
         ],
