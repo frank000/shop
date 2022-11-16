@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/components/app_drawer.dart';
 import 'package:shop/components/badge.dart';
 import 'package:shop/components/product_grid.dart';
 import 'package:shop/models/cart.dart';
 import 'package:shop/models/product_list.dart';
+import 'package:shop/pages/cart_page.dart';
+import 'package:shop/utils/app_routes.dart';
 
 enum FilterOptions {
   Favorite,
@@ -42,7 +45,9 @@ class ProductsOverviewPage extends StatelessWidget {
           ),
           Consumer<Cart>(
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed(AppRoutes.CART);
+              },
               icon: Icon(Icons.shopping_cart),
             ),
             builder: (context, cart, child) {
@@ -54,6 +59,7 @@ class ProductsOverviewPage extends StatelessWidget {
           ),
         ],
       ),
+      drawer: AppDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: ProductGrid(),
