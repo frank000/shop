@@ -11,6 +11,10 @@ class ProductList extends ChangeNotifier {
     notifyListeners();
   }
 
+  int get itensCount {
+    return _itens.length;
+  }
+
   void showAll() {
     _showFavoriteOnly = false;
     notifyListeners();

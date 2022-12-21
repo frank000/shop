@@ -1,60 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shop/models/cart.dart';
 import 'package:shop/models/product.dart';
-import 'package:shop/utils/app_routes.dart';
 
 class ProductItem extends StatelessWidget {
-  const ProductItem({Key? key}) : super(key: key);
+  const ProductItem({super.key, required this.product});
+
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
-    final Product product = Provider.of<Product>(context, listen: false
-        // listen:false  // usamos para dados que são imutáveis, dados que não precisam refletir na
-        );
-    final Cart cart = Provider.of<Cart>(context, listen: false
-        // listen:false  // usamos para dados que são imutáveis, dados que não precisam refletir na
-        );
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-      child: GridTile(
-        child: GestureDetector(
-          onTap: () {
-            Navigator.of(context)
-                .pushNamed(AppRoutes.PRODUCT_DETAIL, arguments: product);
-          },
-          child: Image.network(
-            product.imageUrl,
-            fit: BoxFit.cover,
-          ),
-        ),
-        footer: GridTileBar(
-          backgroundColor: Colors.black38,
-          leading: Consumer<Product>(
-            builder: (context, product, _) => IconButton(
-              onPressed: () {
-                product.toggleFavorite();
-              },
-              icon: product.isFavorite
-                  ? const Icon(Icons.favorite)
-                  : const Icon(Icons.favorite_border_sharp),
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-          ),
-          trailing: IconButton(
-            onPressed: () {
-              cart.addItem(product);
-            },
-            icon: Icon(Icons.shopping_cart),
-            color: Theme.of(context).accentColor,
-          ),
-          title: Text(
-            product.name,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 15),
-          ),
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundImage: NetworkImage(product.imageUrl),
+      ),
+      trailing: Container(
+        width: 100,
+        child: Row(
+          children: [
+            IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+            IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
+          ],
         ),
       ),
+      title: Text(product.name),
     );
   }
 }
