@@ -16,8 +16,15 @@ class ProductItem extends StatelessWidget {
         width: 100,
         child: Row(
           children: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
-            IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
+            IconButton(
+              onPressed: () {},
+              color: Theme.of(context).primaryColor,
+              icon: Icon(Icons.edit),
+            ),
+            IconButton(
+                onPressed: () {},
+                color: Theme.of(context).errorColor,
+                icon: Icon(Icons.delete)),
           ],
         ),
       ),
